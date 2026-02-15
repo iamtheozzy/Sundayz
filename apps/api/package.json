@@ -1,0 +1,23 @@
+{
+  "name": "@sundayz/api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "lint": "echo 'TODO: configure linter'",
+    "test": "echo 'TODO: configure tests'"
+  },
+  "dependencies": {
+    "@sundayz/types": "*",
+    "@sundayz/pipeline-transcription": "*",
+    "@sundayz/pipeline-ai": "*",
+    "@sundayz/pipeline-video": "*",
+    "@sundayz/pipeline-voice": "*"
+  },
+  "devDependencies": {
+    "@sundayz/tsconfig": "*",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

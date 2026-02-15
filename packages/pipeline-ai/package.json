@@ -1,0 +1,19 @@
+{
+  "name": "@sundayz/pipeline-ai",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "echo 'TODO: configure linter'",
+    "test": "echo 'TODO: configure tests'"
+  },
+  "dependencies": {
+    "@sundayz/types": "*"
+  },
+  "devDependencies": {
+    "@sundayz/tsconfig": "*",
+    "typescript": "^5.4.0"
+  }
+}
