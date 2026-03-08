@@ -11,7 +11,13 @@
   "dependencies": {
     "@sundayz/types": "*",
     "@sundayz/ui": "*",
-    "next": "^15.2.0",
+    "@sundayz/pipeline-transcription": "*",
+    "@sundayz/pipeline-ai": "*",
+    "@sundayz/pipeline-video": "*",
+    "@sundayz/pipeline-voice": "*",
+    "@supabase/supabase-js": "^2.49.0",
+    "hono": "^4.7.0",
+    "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -19,6 +25,8 @@
     "@sundayz/tsconfig": "*",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
     "typescript": "^5.4.0"
   }
 }
