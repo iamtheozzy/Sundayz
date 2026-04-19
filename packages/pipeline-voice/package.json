@@ -10,10 +10,10 @@
     "test": "echo 'TODO: configure tests'"
   },
   "dependencies": {
-    "@sundayz/types": "*"
+    "@sundayz/types": "workspace:*"
   },
   "devDependencies": {
-    "@sundayz/tsconfig": "*",
+    "@sundayz/tsconfig": "workspace:*",
     "typescript": "^5.4.0"
   }
 }

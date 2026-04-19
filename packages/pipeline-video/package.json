@@ -10,13 +10,21 @@
     "test": "echo 'TODO: configure tests'"
   },
   "dependencies": {
-    "@sundayz/types": "*",
+    "@sundayz/types": "workspace:*",
     "remotion": "^4.0.0",
     "@remotion/cli": "^4.0.0",
     "@remotion/renderer": "^4.0.0"
   },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
-    "@sundayz/tsconfig": "*",
+    "@sundayz/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^5.4.0"
   }
 }

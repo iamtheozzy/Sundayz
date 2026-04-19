@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { createClient as createBrowserClient } from "@sundayz/auth/client";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    const supabase = createClient();
+    const supabase = createBrowserClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,

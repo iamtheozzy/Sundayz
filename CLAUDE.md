@@ -8,26 +8,51 @@ SundayFlow turns a Sunday sermon into a full week of content: social media clips
 
 ## Monorepo Structure
 
-This is a Turborepo monorepo managed with npm workspaces.
+This is a Turborepo monorepo managed with npm workspaces. One Next.js app contains everything (marketing + auth + dashboard) via App Router route groups; everything reusable lives in `packages/`.
 
 ```
 apps/
-  web/          → Next.js 16 frontend + API (React 19, App Router)
-                  - Sermon upload UI & YouTube URL input
-                  - Content review dashboard
-                  - Free demo (paste YouTube URL → see output)
-                  - Landing page & waitlist
-                  - Hono API routes via catch-all route handler
+  web/          → Next.js 16 (React 19, App Router). One deploy serves both marketing and the app.
+                  src/app/
+                    (marketing)/     → Public surface: landing, pricing, free demo, waitlist
+                    (auth)/          → login, signup (URLs unchanged — route groups don't affect paths)
+                    (app)/           → Authenticated surface: dashboard, sermon upload, content review
+                    auth/            → OAuth callback (/auth/callback) + server actions (signOut)
+                    api/[[...route]] → Thin handle() wrapper that mounts @sundayz/api's Hono app
+                    layout.tsx       → Root layout
+                    globals.css
 
 packages/
+  # Data & contracts
   types/                    → Shared TypeScript interfaces (Sermon, Transcript, SermonAnalysis, GeneratedContent, VideoClip, VoiceProfile, Church)
+  db/                       → Supabase schema, migrations/, policies/ (RLS), generated Database types
+  config/                   → Zod-validated env vars + PLAN_LIMITS quota constants
+
+  # Platform
+  auth/                     → Supabase auth helpers (browser/server/middleware/Hono) — used by apps/web
+  api/                      → Hono app definition + route modules. Mounted by apps/web's catch-all
   ui/                       → Shared React UI components (Tailwind v4 + shadcn/ui)
-  tsconfig/                 → Shared TypeScript configs (base.json, nextjs.json)
+  emails/                   → Transactional emails — React Email templates sent via Resend
+
+  # Business logic
+  billing/                  → Stripe customers, subscriptions, checkout, portal, webhooks, quota
+  jobs/                     → Provider-agnostic job queue interface (provider TBD: Trigger.dev / Inngest / Supabase Queues)
+
+  # Pipeline (the core product)
   pipeline-transcription/   → Step 1: Audio extraction (FFmpeg) + Whisper transcription with word-level timestamps
   pipeline-ai/              → Steps 2-3: Sermon analysis + content generation via Claude API
-  pipeline-video/           → Step 4: Video clip rendering via Remotion (React components for captions, branding, multi-format)
+  pipeline-video/           → Step 4: Video clip rendering via Remotion
   pipeline-voice/           → Step 5 (Premium): Audio devotionals via ElevenLabs voice cloning
+  pipeline-orchestrator/    → Coordinates the 5 steps, persists PipelineState, handles retries
+
+  # Tooling
+  tsconfig/                 → Shared TypeScript configs (base.json, nextjs.json)
+  eslint-config/            → Shared ESLint flat config (presets WIP)
 ```
+
+### Why a single Next app instead of separate marketing + dashboard apps?
+
+Lower ops surface for a solo founder. Route groups give clean separation in the codebase without the cost of a second deploy. If marketing iteration speed becomes a bottleneck, `(marketing)/` lifts cleanly into its own `apps/marketing` later.
 
 ## Content Generation Pipeline
 
@@ -77,12 +102,15 @@ Both create compounding switching costs — the longer a church uses SundayFlow,
 ## Commands
 
 ```bash
-npm run dev       # Start all apps in dev mode
-npm run build     # Build all packages and apps
-npm run lint      # Lint all packages
-npm run test      # Run all tests
-npm run format    # Format with Prettier
+pnpm install      # Install workspace dependencies
+pnpm dev          # Start all apps in dev mode
+pnpm build        # Build all packages and apps
+pnpm lint         # Lint all packages
+pnpm test         # Run all tests
+pnpm format       # Format with Prettier
 ```
+
+Package manager is **pnpm** (workspaces declared in `pnpm-workspace.yaml`). Workspace deps reference each other via `workspace:*`.
 
 ## Prototype Scope
 

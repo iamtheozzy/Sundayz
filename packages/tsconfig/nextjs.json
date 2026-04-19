@@ -4,6 +4,7 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "ES2022"],
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "ES2022",
     "jsx": "preserve",
     "noEmit": true,

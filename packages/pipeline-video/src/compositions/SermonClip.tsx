@@ -4,7 +4,7 @@
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 import type { WordTimestamp } from "@sundayz/types";
 
-export interface SermonClipProps {
+export interface SermonClipProps extends Record<string, unknown> {
   words: WordTimestamp[];
   brandColors: { primary: string; accent: string };
   churchName?: string;

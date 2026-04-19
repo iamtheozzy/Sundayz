@@ -1,0 +1,22 @@
+{
+  "name": "@sundayz/emails",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "echo 'TODO: configure linter'",
+    "test": "echo 'TODO: configure tests'"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.0.30",
+    "react": "^19.0.0",
+    "resend": "^4.0.0"
+  },
+  "devDependencies": {
+    "@sundayz/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.4.0"
+  }
+}

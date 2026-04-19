@@ -1,0 +1,33 @@
+{
+  "name": "@sundayz/auth",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./server": "./src/server.ts",
+    "./middleware": "./src/middleware.ts",
+    "./hono": "./src/hono.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "echo 'TODO: configure linter'"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.6.0",
+    "@supabase/supabase-js": "^2.49.0",
+    "hono": "^4.7.0"
+  },
+  "peerDependencies": {
+    "next": "^16.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@sundayz/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "next": "^16.0.0",
+    "typescript": "^5.4.0"
+  }
+}

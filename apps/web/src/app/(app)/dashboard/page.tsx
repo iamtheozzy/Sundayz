@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient as createServerClient } from "@sundayz/auth/server";
 import { signOut } from "@/app/auth/actions";
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

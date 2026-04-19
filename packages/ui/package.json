@@ -9,7 +9,7 @@
     "lint": "echo 'TODO: configure linter'"
   },
   "devDependencies": {
-    "@sundayz/tsconfig": "*",
+    "@sundayz/tsconfig": "workspace:*",
     "typescript": "^5.4.0"
   }
 }
